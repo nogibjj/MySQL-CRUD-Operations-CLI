@@ -1,14 +1,25 @@
 """
-Top level script.
+ETL-Query script
 """
-from lib.func_utils import power
 
-if __name__ == "__main__":
-    squarer = power(2)
-    print(f"Square of 3 is {squarer(3)}.")
+import argparse
 
-    cuber = power(3)
-    print(f"Cube of 4 is {cuber(4)}.")
+from lib.extract import extract
+from lib.transform_load import load
+from lib.query import query
 
-    inverter = power(-1)
-    print(f"Inverse of 2 is {inverter(-2)}.")
+parser = argparse.ArgumentParser()
+parser.add_argument("--step", choices=["extract", "load", "query"])
+args = parser.parse_args()
+
+if args.step == "extract":
+    print("Extracting data...")
+    extract()
+
+elif args.step == "load":
+    print("Transforming and loading data...")
+    load()
+
+elif args.step == "query":
+    print("Querying data...")
+    query()
