@@ -12,7 +12,7 @@ def load(dataset="/workspaces/MySQL-CRUD-Operations/data/Titanic.csv"):
 
     # prints the full working directory and path
     print(os.getcwd())
-    payload = csv.reader(open(dataset, newline=""), delimiter=",")
+    payload = csv.reader(open(dataset, newline="", encoding="utf-8"), delimiter=",")
     print(payload)
     conn = sqlite3.connect("TitanicDB.db")
     c = conn.cursor()
