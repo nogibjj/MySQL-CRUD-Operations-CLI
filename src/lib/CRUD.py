@@ -3,7 +3,7 @@ import sqlite3
 
 def create_table():
     """Create the TitanicDB table"""
-    conn = sqlite3.connect("TitanicDB.db")
+    conn = sqlite3.connect("/workspaces/MySQL-CRUD-Operations/src/TitanicDB.db")
     cursor = conn.cursor()
     cursor.execute(
         """
@@ -32,16 +32,17 @@ def create_table():
 
 
 def create(
-    survived, pclass, name, sex, age, sibsp, parch, ticket, fare, cabin, embarked
+    passenger_id, survived, pclass, name, sex, age, sibsp, parch, ticket, fare, cabin, embarked
 ):
     """Insert a new item into the TitanicDB table"""
-    conn = sqlite3.connect("TitanicDB.db")
+    conn = sqlite3.connect("/workspaces/MySQL-CRUD-Operations/src/TitanicDB.db")
     cursor = conn.cursor()
     # cursor.execute("SELECT COUNT(*) FROM TitanicDB")
     # id = cursor.fetchone()[0] + 1
     cursor.execute(
         """INSERT INTO TitanicDB 
-                   (Survived,
+                   (PassengerId,
+                    Survived,
                     Pclass,
                     Name,
                     Sex,
@@ -52,8 +53,8 @@ def create(
                     Fare,
                     Cabin,
                     Embarked) 
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
-        (survived, pclass, name, sex, age, sibsp, parch, ticket, fare, cabin, embarked),
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+        (passenger_id, survived, pclass, name, sex, age, sibsp, parch, ticket, fare, cabin, embarked),
     )
     conn.commit()
     conn.close()
@@ -61,7 +62,7 @@ def create(
 
 def read():
     """Query the database for all rows of the TitanicDB table"""
-    conn = sqlite3.connect("TitanicDB.db")
+    conn = sqlite3.connect("/workspaces/MySQL-CRUD-Operations/src/TitanicDB.db")
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM TitanicDB")
     rows = cursor.fetchall()
@@ -86,7 +87,7 @@ def update(
     passenger_id,
 ):
     """Update an item in the TitanicDB table"""
-    conn = sqlite3.connect("TitanicDB.db")
+    conn = sqlite3.connect("/workspaces/MySQL-CRUD-Operations/src/TitanicDB.db")
     cursor = conn.cursor()
     cursor.execute(
         """UPDATE TitanicDB 
@@ -123,7 +124,7 @@ def update(
 
 def delete(passenger_id):
     """Delete an item from the TitanicDB table"""
-    conn = sqlite3.connect("TitanicDB.db")
+    conn = sqlite3.connect("/workspaces/MySQL-CRUD-Operations/src/TitanicDB.db")
     cursor = conn.cursor()
     cursor.execute("DELETE FROM TitanicDB WHERE PassengerId=?", (passenger_id,))
     deleted_rows = cursor.rowcount
@@ -134,7 +135,7 @@ def delete(passenger_id):
 
 def get_database_dimensions():
     """Get the number of rows and columns in the TitanicDB table"""
-    conn = sqlite3.connect("TitanicDB.db")
+    conn = sqlite3.connect("/workspaces/MySQL-CRUD-Operations/src/TitanicDB.db")
     cursor = conn.cursor()
     cursor.execute(
         """SELECT COUNT(*) AS num_rows, 
@@ -150,9 +151,9 @@ def get_database_dimensions():
 
 
 if __name__ == "__main__":
-    create_table()
-    create_table()
+    last_id = get_database_dimensions()[0]
     create(
+        passenger_id=last_id,
         survived=0,
         pclass=3,
         name="Bruce Wayne",
@@ -163,6 +164,6 @@ if __name__ == "__main__":
         ticket="PC 1996",
         fare=8.8,
         cabin="C8",
-        embarked="S",
+        embarked="S"
     )
     read()
