@@ -1,4 +1,5 @@
 # Interating with DB using SQLite3 and CLI
+[![CI](https://github.com/nogibjj/MySQL-CRUD-Operations-CLI/actions/workflows/main.yml/badge.svg)](https://github.com/nogibjj/MySQL-CRUD-Operations-CLI/actions/workflows/main.yml)
 
 ## About
 
