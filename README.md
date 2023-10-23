@@ -2,7 +2,7 @@
 
 ## About
 
-This project aims to perform the Extract-Tranform-Load steps on a database using SQLite. The data comes from the toy dataset hosted on github - [Titanic](https://github.com/quantumsnowball/toy-datasets-collections/blob/master/titanic/titanic.csv). This repositroy contains files to perform CRUD (Create-Write-Update-Delete) operations in a SQLite Database using Python and CLI.
+This project aims to perform the Extract-Tranform-Load steps on a database using SQLite. The data comes from the toy dataset hosted on github - [Titanic](https://github.com/quantumsnowball/toy-datasets-collections/blob/master/titanic/titanic.csv). This repositroy shows how to perform ETL operations on the dataset, and query it.
 
 ## User Guide
 
