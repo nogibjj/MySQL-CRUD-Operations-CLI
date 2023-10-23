@@ -7,14 +7,14 @@ import os
 
 
 # load the csv file and insert into a new sqlite3 database
-def load(dataset="/workspaces/MySQL-CRUD-Operations/data/Titanic.csv"):
+def load(dataset, db_path):
     """ "Transforms and Loads data into the local SQLite3 database"""
 
     # prints the full working directory and path
     print(os.getcwd())
     payload = csv.reader(open(dataset, newline="", encoding="utf-8"), delimiter=",")
     print(payload)
-    conn = sqlite3.connect("TitanicDB.db")
+    conn = sqlite3.connect(os.path.join(db_path, "TitanicDB"))
     c = conn.cursor()
     c.execute("DROP TABLE IF EXISTS TitanicDB")
     c.execute(
@@ -54,4 +54,4 @@ def load(dataset="/workspaces/MySQL-CRUD-Operations/data/Titanic.csv"):
     )
     conn.commit()
     conn.close()
-    return "TitanicDB.db"
+    return os.path.join(db_path, "TitanicDB")

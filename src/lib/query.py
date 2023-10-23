@@ -4,12 +4,12 @@ import sqlite3
 from prettytable import PrettyTable
 
 
-def query():
-    """Query the database for the top 5 rows of the GroceryDB table"""
-    conn = sqlite3.connect("TitanicDB.db")
+def query(dbpath, n):
+    """Query the database for the top n rows of the GroceryDB table"""
+    conn = sqlite3.connect(dbpath)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM TitanicDB LIMIT 5")
-    rows = cursor.fetchall()
+    cursor.execute("SELECT * FROM TitanicDB LIMIT " + str(int(n)+1))
+    rows = cursor.fetchall()[1:]
     conn.close()
 
     # Create a table to display the results
@@ -18,6 +18,6 @@ def query():
     for row in rows:
         table.add_row(row)
 
-    print("Top 5 rows of the GroceryDB table:")
+    print("Top " + str(n) + " rows of the TitanicDB table:")
     print(table)
     return "Success"
